@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTodoList } from "./services/useTodoList";
 
 export function MyToDoList() {
   const todo = useTodoList();
+
+  useEffect(() => {
+   todo.getTodosFromAPI();
+},[]);
 
   return (
     <div className="todoapp stack-large">
@@ -68,9 +72,9 @@ export function MyToDoList() {
         {todo.list.map((item, index) => {
           if (item.done) return null;
           return (
-            <li key={item.task}>
+            <li key={item.label}>
               {" "}
-              <input id="todo-2" type="checkbox" /> {item.task}{" "}
+              <input id="todo-2" type="checkbox" /> {item.label}{" "}
             </li>
           );
         })}
